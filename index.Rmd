@@ -6,6 +6,18 @@ output:
     toc_float: true
 ---
 
-# Welcome to my site!
+## Welcome to my site!
 
+<img src="images/kdunn.jpg" style="width:20%">
 
+My name is Katherine Dunn, I am a current MPH student at Columbia Mailman School of Public Health. With a background in Engineering and medical devices, my goal is to incorporate my epidemiological skill with my prior expertise to develop technologies and therapeutics that make a clinical impact. 
+
+My specific interests are in aging-related chronic diseases, specifically, cardiovascular, and neurological diseases. I am interested in modifiable risk factors in chronic diseases, particularly physical activity and social engagement! 
+
+## Personal Interests
+
+Outside of my studies, I enjoy playing Sudoku, trying new restaurants in Manhattan, and lifting weights. I have been playing intramural kickball in the city since moving here in 2025. 
+
+## Linkedin
+
+[Linkedin](https://www.linkedin.com/in/katherine-dunn-80370621a/)
