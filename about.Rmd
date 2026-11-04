@@ -1,5 +1,5 @@
 ---
-title: "About This Page"
+title: "About Me"
 output: 
   html_document:
     toc: true
@@ -7,5 +7,55 @@ output:
 
 ---
 
-# 
+## EDUCATION
+####  Expected May 2027
+Columbia University Mailman School of Public Health, New York, NY
+Master of Public Health, Epidemiology; Biostatistics and Data Science Certificate
+
+#### August 2018-May 2022
+University of Virginia, Charlottesville, VA
+Bachelor of Science in Biomedical Engineering GPA: 3.50                			                                         
+Relevant Coursework: Microbial BME, Biomaterials, Nanomedicine, Bioprocess bioproduct, Cell Biology, Physiology, Organic Chemistry 
+
+## EXPERIENCE
+
+#### Sep 2023- May 2025
+LSI Solutions 
+Surgical Device Engineer, Rochester, NY
+- Liaised with sales reps and surgeons to convey device design and use
+- Developed data analysis processes for customer complaints
+- Implemented complaint tools that improved report timeliness by over fifty percent
+- Performed root cause analysis on complaints based on device evaluations
+- Tested and imaged devices to aid in engineering investigations
+- Trained new employees in device function and design 
+- Acted as a trainer for surgeons in simulated labs
+CAPA Project Engineer 									March 2023- Sep 2023 
+- Performance data analysis to improve the CAPA system  
+- Streamlined process documentation pertaining to the CAPA system
+- Applied problem solving skills to improve medical device processes and products
+- Investigated and verified root causes through data-driven problem-solving
+- Managed 3-4 simultaneous team technical investigations into nonconformances and complaints
+
+#### April 2019- Dec 2019
+University of Virginia School of Engineering
+Undergraduate Research | Computational Systems Biology Laboratory                                                                   
+- Isolated pure cultures of clinical antibiotic resistant P. aeruginosa for sequencing 
+- Cell Culture, aseptic technique, culture dilution and colony isolation 
+- Participated in literature discussion with lab members
+
+#### August 2021-May 2022
+University of Virginia, Charlottesville, VA
+Capstone Project Modeling Iliac Vein Restenosis 
+- Computational Fluid Dynamic Analysis of Pelvic and Abdominal Veins 
+- Created 3D models of venous anatomy using CT data, 3D slicer, and Autodesk Maya  
+- Modeled blood flow in vein model using Ansys fluid dynamics
+- Analyzed fluid flow outputs to establish factors contributing to stent restenosis
+- Presented research findings in clinical settings
+
+## SKILLS 
+Data analysis: SAS, Excel, MATLAB, Python
+Computational skills: Autodesk Fusion 360, Autodesk Maya, ANSYS
+
+## CERTIFICATES & TRAINING
+ISO13485, HIPPA, Human Subjects Research, Sterilization Validation
 
