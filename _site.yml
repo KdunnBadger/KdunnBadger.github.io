@@ -5,7 +5,7 @@ navbar:
   right:
     - text: "About"
       href: about.html
-    - text: "Weather Experience"
+    - text: "Weather Experience Dashboard"
       href: dashboard.html
     - icon: fa-envelope fa-lg
       href: mailto:<kad2243@columbia.edu>
