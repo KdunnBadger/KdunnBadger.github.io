@@ -9,9 +9,9 @@ output:
 
 #Weather Patterns 
 
-Below is a graphical summary of the weather data in the NY locations .
+Below is a graphical summary of the weather data in the NY locations I have resided in perminently.
 
-```{r}
+```{r, warning= FALSE, message= FALSE}
 library(tidyverse)
 library(plotly)
 library(p8105.datasets)
@@ -52,40 +52,40 @@ ny_new <- ny_noaa %>%
 
 ```
 
-#Total Yearly snow in Rochester and NYC Cenral park
+#Total Yearly snowfall (in) in Rochester and NYC Cenral park
 
-```{r}
+```{r, warning= FALSE, message= FALSE}
 ny_new %>%
   group_by(name, year) %>%
   summarise(total_snow = sum(snow, na.rm = TRUE)) %>%
   plot_ly(x= ~year, y = ~total_snow, color = ~name, 
-          type =   "bar")
+          type =   "bar", text= ~total_snow)
   
 ```
 
-#Average Yearly precipitation by year in Rochester and NYC Central Park
-```{r}
+#Average Yearly precipitation (in) by year in Rochester and NYC Central Park
+```{r, warning= FALSE, message= FALSE}
 ny_new %>%
   group_by(name, year) %>%
   summarise(avg_prcp = mean(prcp, na.rm = TRUE)) %>%
-  plot_ly(x= ~year, y = ~avg_prcp, color = ~name, type= "scatter", mode = "lines+markers") 
+  plot_ly(x= ~year, y = ~avg_prcp, color = ~name, type= "scatter", mode = "lines+markers", text = ~avg_prcp) 
 ```
 
 
-#Monthly minimum temp yearly in Rochester
-```{r}
+#Monthly minimum temp (F) yearly in Rochester
+```{r, warning= FALSE, message= FALSE}
 ny_new %>%
   filter(name == "ROCHESTER GTR INTL") %>%
   group_by(name,month,year) %>%
   summarise(monthly_min = min(tmin, na.rm = TRUE)) %>%
-  plot_ly(x= ~month, y = ~monthly_min, color = ~year, type= "scatter", mode = "lines+markers") 
+  plot_ly(x= ~month, y = ~monthly_min, color = ~year, type= "scatter", mode = "lines+markers", text =~monthly_min )
 ```
 
-#Monthly minimum temp yearly in NYC Central Park
-```{r}
+#Monthly minimum temp (F) yearly in NYC Central Park
+```{r, warning= FALSE, message= FALSE}
 ny_new %>%
   filter(name == "NY CITY CNTRL PARK") %>%
   group_by(name,month,year) %>%
   summarise(monthly_min = min(tmin, na.rm = TRUE)) %>%
-  plot_ly(x= ~month, y = ~monthly_min, color = ~year, type= "scatter", mode = "lines+markers") 
+  plot_ly(x= ~month, y = ~monthly_min, color = ~year, type= "scatter", mode = "lines+markers", text =~monthly_min ) 
 ```
