@@ -16,6 +16,7 @@ library(tidyverse)
 library(plotly)
 library(p8105.datasets)
 library(measurements)
+library(lubridate)
 library(readr)
 
 data("ny_noaa")
@@ -44,18 +45,47 @@ stations <- read_fwf(
 )
 
 #Flitering to only Rochester and NYC stations
-ny_noaa <- ny_noaa %>%
+ny_new <- ny_noaa %>%
   left_join(stations, by = "id") %>%
-  filter(name %in% c("ROCHESTER 5.0 WNW", "NY CITY CNTRL PARK" ),
+  filter(name %in% c("ROCHESTER GTR INTL", "NY CITY CNTRL PARK" ),
          year(date) >= 2000)
 
-  
 ```
 
+#Total Yearly snow in Rochester and NYC Cenral park
 
 ```{r}
-ny_noaa %>%
-  plot_ly()
+ny_new %>%
+  group_by(name, year) %>%
+  summarise(total_snow = sum(snow, na.rm = TRUE)) %>%
+  plot_ly(x= ~year, y = ~total_snow, color = ~name, 
+          type =   "bar")
   
 ```
 
+#Average Yearly precipitation by year in Rochester and NYC Central Park
+```{r}
+ny_new %>%
+  group_by(name, year) %>%
+  summarise(avg_prcp = mean(prcp, na.rm = TRUE)) %>%
+  plot_ly(x= ~year, y = ~avg_prcp, color = ~name, type= "scatter", mode = "lines+markers") 
+```
+
+
+#Monthly minimum temp yearly in Rochester
+```{r}
+ny_new %>%
+  filter(name == "ROCHESTER GTR INTL") %>%
+  group_by(name,month,year) %>%
+  summarise(monthly_min = min(tmin, na.rm = TRUE)) %>%
+  plot_ly(x= ~month, y = ~monthly_min, color = ~year, type= "scatter", mode = "lines+markers") 
+```
+
+#Monthly minimum temp yearly in NYC Central Park
+```{r}
+ny_new %>%
+  filter(name == "NY CITY CNTRL PARK") %>%
+  group_by(name,month,year) %>%
+  summarise(monthly_min = min(tmin, na.rm = TRUE)) %>%
+  plot_ly(x= ~month, y = ~monthly_min, color = ~year, type= "scatter", mode = "lines+markers") 
+```
