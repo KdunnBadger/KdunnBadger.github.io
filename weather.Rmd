@@ -1,8 +1,61 @@
 ---
-title: "Weather Experience in Places of Residence"
+title: "Weather Experience in NYC"
 output: 
   html_document:
     toc: true
     toc_float: true
 
 ---
+
+#Weather Patterns 
+
+Below is a graphical summary of the weather data in the NY locations .
+
+```{r}
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+library(measurements)
+library(readr)
+
+data("ny_noaa")
+
+ny_noaa = ny_noaa %>%
+  mutate(
+  year = year(date),
+  month = month(date),
+  day = day(date),
+      tmax = as.numeric(tmax),
+    tmin = as.numeric(tmin),
+    prcp = prcp / 254,
+    snow = snow / 25.4,
+    snwd = snwd / 25.4,
+    tmax = conv_unit(tmax / 10, "C", "F"),
+    tmin = conv_unit(tmin / 10, "C", "F")
+  )
+
+#Merging data set with station locations, using NOAA documentation 
+
+url <- "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt"
+
+stations <- read_fwf(
+  url,
+  fwf_cols(id = c(1, 11), name = c(42, 71))
+)
+
+#Flitering to only Rochester and NYC stations
+ny_noaa <- ny_noaa %>%
+  left_join(stations, by = "id") %>%
+  filter(name %in% c("ROCHESTER 5.0 WNW", "NY CITY CNTRL PARK" ),
+         year(date) >= 2000)
+
+  
+```
+
+
+```{r}
+ny_noaa %>%
+  plot_ly()
+  
+```
+
