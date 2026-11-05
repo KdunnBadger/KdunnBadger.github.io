@@ -1,0 +1,87 @@
+---
+title: "Dashboard"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    source: embed
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(plotly)
+library(p8105.datasets)
+library(measurements)
+library(lubridate)
+library(readr)
+
+data("ny_noaa")
+
+ny_noaa = ny_noaa %>%
+  mutate(
+  year = year(date),
+  month = month(date),
+  day = day(date),
+      tmax = as.numeric(tmax),
+    tmin = as.numeric(tmin),
+    prcp = prcp / 254,
+    snow = snow / 25.4,
+    snwd = snwd / 25.4,
+    tmax = conv_unit(tmax / 10, "C", "F"),
+    tmin = conv_unit(tmin / 10, "C", "F")
+  )
+
+#Merging data set with station locations, using NOAA documentation 
+
+url <- "https://www.ncei.noaa.gov/pub/data/ghcn/daily/ghcnd-stations.txt"
+
+stations <- read_fwf(
+  url,
+  fwf_cols(id = c(1, 11), name = c(42, 71))
+)
+
+#Flitering to only Rochester and NYC stations
+ny_new <- ny_noaa %>%
+  left_join(stations, by = "id") %>%
+  filter(name %in% c("ROCHESTER GTR INTL", "NY CITY CNTRL PARK" ),
+         year(date) >= 2000)
+
+```
+
+Column {data-width=650}
+-----------------------------------------------------------------------
+
+### Chart A
+
+```{r}
+ny_new %>%
+  group_by(name, year) %>%
+  summarise(total_snow = sum(snow, na.rm = TRUE)) %>%
+  plot_ly(x= ~year, y = ~total_snow, color = ~name, 
+          type =   "bar", text= ~total_snow)
+  
+```
+
+Column {data-width=350}
+-----------------------------------------------------------------------
+
+### Chart B
+
+```{r}
+ny_new %>%
+  group_by(name, year) %>%
+  summarise(avg_prcp = mean(prcp, na.rm = TRUE)) %>%
+  plot_ly(x= ~year, y = ~avg_prcp, color = ~name, type= "scatter", mode = "lines+markers", text = ~avg_prcp)
+```
+
+### Chart C
+
+```{r}
+ny_new %>%
+  filter(name == "ROCHESTER GTR INTL") %>%
+  group_by(name,month,year) %>%
+  summarise(monthly_min = min(tmin, na.rm = TRUE)) %>%
+  plot_ly(x= ~month, y = ~monthly_min, color = ~year, type= "scatter", mode = "lines+markers", text =~monthly_min )
+
+```
+
